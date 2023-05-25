@@ -1,17 +1,16 @@
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 /*
   In order to access user options throughout the app, we have to
   add them as a node within the Graphql.
 
   This creates a type called "CoreOptions" on the GraphQL schema.
 */
-exports.createSchemaCustomization = function (_ref) {
-  var actions = _ref.actions;
-  var createTypes = actions.createTypes;
-  createTypes("type\n    CoreOptions implements Node {\n      shopName: String\n      accessToken: String\n    }");
+exports.createSchemaCustomization = ({actions}) => {
+  const {createTypes} = actions;
+  createTypes(`type
+    CoreOptions implements Node {
+      shopName: String
+      accessToken: String
+    }`);
 };
 
 /*
@@ -26,26 +25,25 @@ exports.createSchemaCustomization = function (_ref) {
   • https://www.christopherbiscardi.com/post/applying-theme-options-using-custom-configuration-nodes/
   • https://www.erichowey.dev/writing/examples-of-using-options-in-gatsby-themes/
 */
-exports.sourceNodes = function (_ref2, _ref3) {
-  var createNode = _ref2.actions.createNode,
-    createContentDigest = _ref2.createContentDigest;
-  var _ref3$shopName = _ref3.shopName,
-    shopName = _ref3$shopName === void 0 ? "" : _ref3$shopName,
-    _ref3$accessToken = _ref3.accessToken,
-    accessToken = _ref3$accessToken === void 0 ? "" : _ref3$accessToken;
-  var coreOptions = {
-    shopName: shopName,
-    accessToken: accessToken
+exports.sourceNodes = (
+  {actions: {createNode}, createContentDigest},
+  {shopName = ``, accessToken = ``},
+) => {
+  const coreOptions = {
+    shopName,
+    accessToken,
   };
-  createNode((0, _extends2.default)({}, coreOptions, {
-    id: "gatsby-theme-shopify-manager",
+
+  createNode({
+    ...coreOptions,
+    id: `gatsby-theme-shopify-manager`,
     parent: null,
     children: [],
     internal: {
-      description: "Core Options",
-      type: "CoreOptions",
+      description: `Core Options`,
+      type: `CoreOptions`,
       content: JSON.stringify(coreOptions),
-      contentDigest: createContentDigest(JSON.stringify(coreOptions))
-    }
-  }));
+      contentDigest: createContentDigest(JSON.stringify(coreOptions)),
+    },
+  });
 };
