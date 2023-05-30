@@ -8,7 +8,11 @@ export const wrapPageElement = ({ element, props }, themeOptions) => {
   const { language, languages, originalPath, defaultLanguage, path } =
     pageContext
 
-  console.log("gatsby-shopify-manager wrapPageElement: ", pageContext, path)
+  console.log(
+    "gatsby-shopify-manager wrapPageElement 30/05/23: ",
+    pageContext,
+    path
+  )
 
   const { shouldWrapRootElementWithProvider, shopName, accessToken } =
     withDefaults(themeOptions)

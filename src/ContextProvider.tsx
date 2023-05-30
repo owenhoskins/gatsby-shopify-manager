@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import ShopifyBuy from "shopify-buy"
 import { Context } from "./Context"
 import { LocalStorage, LocalStorageKeys } from "./utils"
@@ -6,10 +6,20 @@ import { LocalStorage, LocalStorageKeys } from "./utils"
 interface Props {
   shopName: string
   accessToken: string
+  language: string
   children: React.ReactNode
 }
 
-export function ContextProvider({ shopName, accessToken, children }: Props) {
+// @TODO: consdier using `buildClient` wrapped in useMemo() and call it from inside the functional component
+
+let client
+
+export function ContextProvider({
+  shopName,
+  accessToken,
+  children,
+  language,
+}: Props) {
   if (shopName == null || accessToken == null) {
     throw new Error(
       "Unable to build shopify-buy client object. Please make sure that your access token and domain are correct."
@@ -18,30 +28,58 @@ export function ContextProvider({ shopName, accessToken, children }: Props) {
 
   const initialCart = LocalStorage.getInitialCart()
   const [cart, setCart] = useState<ShopifyBuy.Cart | null>(initialCart)
-
   const isCustomDomain = shopName.includes(".")
 
-  const client = ShopifyBuy.buildClient({
-    storefrontAccessToken: accessToken,
-    domain: isCustomDomain ? shopName : `${shopName}.myshopify.com`,
-    apiVersion: `2022-07`,
-    language: "de-de",
-  })
+  function ShopifyBuyInit(language) {
+    if (client?.config?.language && client?.config.language !== language) {
+      // clear cart for new language
+      setCart(null)
+    }
 
-  console.log("Cart: ", client, initialCart, cart)
+    client = useMemo(
+      () =>
+        ShopifyBuy.buildClient({
+          storefrontAccessToken: accessToken,
+          domain: isCustomDomain ? shopName : `${shopName}.myshopify.com`,
+          apiVersion: `2022-07`,
+          language, // "en-GB"
+        }),
+      [language]
+    )
+  }
 
-  console.log("My ContextProvider!")
+  ShopifyBuyInit(language)
+
+  // console.log("Cart: ", client.config, initialCart, cart)
+
   useEffect(() => {
     async function getNewCart() {
-      const newCart = await client.checkout.create({
-        email: "owen.hoskins@gmail.com",
-        buyerIdentity: {
-          countryCode: "DE",
-        },
-      })
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      let newCart
+      const storedCart = LocalStorage.getInitialCart()
+      // const item = [{ variantId, quantity, customAttributes }]
+      if (storedCart?.lineItems) {
+        newCart = await client.checkout.create({
+          lineItems: storedCart.lineItems.map(
+            ({ variant, quantity, customAttributes }) => ({
+              variantId: variant.id,
+              quantity,
+              customAttributes: customAttributes.map(({ key, value }) => ({
+                key,
+                value,
+              })),
+            })
+          ),
+        })
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+      } else {
+        newCart = await client.checkout.create()
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+      }
+
       setCart(newCart)
+      return newCart
     }
 
     async function refreshExistingCart(cartId: string) {
@@ -73,7 +111,7 @@ export function ContextProvider({ shopName, accessToken, children }: Props) {
     } else {
       refreshExistingCart(String(cart.id))
     }
-  }, [])
+  }, [language])
 
   useEffect(() => {
     LocalStorage.set(LocalStorageKeys.CART, JSON.stringify(cart))
