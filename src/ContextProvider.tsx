@@ -24,7 +24,8 @@ export function ContextProvider({ shopName, accessToken, children }: Props) {
   const client = ShopifyBuy.buildClient({
     storefrontAccessToken: accessToken,
     domain: isCustomDomain ? shopName : `${shopName}.myshopify.com`,
-    apiVersion: `2022-04`,
+    apiVersion: `2022-07`,
+    language: "de-de",
   })
 
   console.log("Cart: ", client, initialCart, cart)
@@ -33,8 +34,7 @@ export function ContextProvider({ shopName, accessToken, children }: Props) {
   useEffect(() => {
     async function getNewCart() {
       const newCart = await client.checkout.create({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        email: "owen.hoskins@gmail.com",
         buyerIdentity: {
           countryCode: "DE",
         },
