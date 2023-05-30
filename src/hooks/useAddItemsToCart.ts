@@ -5,8 +5,6 @@ import { Context } from "../Context"
 export function useAddItemsToCart() {
   const { client, cart, setCart } = useContext(Context)
 
-  console.log("useAddItemsToCart Context: ", useContext(Context))
-
   async function addItemsToCart(items: ShopifyBuy.CheckoutLineItemInput[]) {
     if (cart == null || client == null) {
       throw new Error("Called addItemsToCart too soon")

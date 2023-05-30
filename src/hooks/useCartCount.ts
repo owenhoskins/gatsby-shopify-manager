@@ -3,7 +3,6 @@ import { Context } from "../Context"
 
 export function useCartCount() {
   const { cart } = useContext(Context)
-  console.log("useCartCount: ", cart)
   if (cart == null || cart.lineItems?.length < 1) {
     return 0
   }
