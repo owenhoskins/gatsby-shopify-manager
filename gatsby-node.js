@@ -4,14 +4,14 @@
 
   This creates a type called "CoreOptions" on the GraphQL schema.
 */
-exports.createSchemaCustomization = ({actions}) => {
-  const {createTypes} = actions;
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
   createTypes(`type
     CoreOptions implements Node {
       shopName: String
       accessToken: String
-    }`);
-};
+    }`)
+}
 
 /*
   In order to access user options throughout the app, we have to
@@ -26,13 +26,13 @@ exports.createSchemaCustomization = ({actions}) => {
   • https://www.erichowey.dev/writing/examples-of-using-options-in-gatsby-themes/
 */
 exports.sourceNodes = (
-  {actions: {createNode}, createContentDigest},
-  {shopName = ``, accessToken = ``},
+  { actions: { createNode }, createContentDigest },
+  { shopName = ``, accessToken = `` }
 ) => {
   const coreOptions = {
     shopName,
     accessToken,
-  };
+  }
 
   createNode({
     ...coreOptions,
@@ -45,5 +45,5 @@ exports.sourceNodes = (
       content: JSON.stringify(coreOptions),
       contentDigest: createContentDigest(JSON.stringify(coreOptions)),
     },
-  });
-};
+  })
+}
