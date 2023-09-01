@@ -1,7 +1,7 @@
-import {useContext} from 'react';
-import {Context} from '../Context';
+import { useContext } from "react"
+import { ShopifyContext } from "../Context"
 
 export function useClientUnsafe() {
-  const {client} = useContext(Context);
-  return client;
+  const { client } = useContext(ShopifyContext)
+  return client
 }

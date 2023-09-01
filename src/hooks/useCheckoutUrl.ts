@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import { Context } from "../Context"
+import { ShopifyContext } from "../Context"
 
 export function useCheckoutUrl(): string | null {
-  const { cart } = useContext(Context)
+  const { cart } = useContext(ShopifyContext)
   if (cart == null) {
     return null
   }

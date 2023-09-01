@@ -1,10 +1,10 @@
 import { useContext } from "react"
-import { Context } from "../Context"
+import { ShopifyContext } from "../Context"
 
 import { useGetLineItem } from "./useGetLineItem"
 
 export function useUpdateItemQuantity() {
-  const { client, cart, setCart } = useContext(Context)
+  const { client, cart, setCart } = useContext(ShopifyContext)
   const getLineItem = useGetLineItem()
 
   async function updateItemQuantity(

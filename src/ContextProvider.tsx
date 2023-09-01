@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react"
 import ShopifyBuy from "shopify-buy"
-import { Context } from "./Context"
+import { ShopifyContext } from "./Context"
 import { LocalStorage, LocalStorageKeys } from "./utils"
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 
 let client
 
-export function ContextProvider({
+export function ManagerContextProvider({
   shopName,
   accessToken,
   children,
@@ -118,7 +118,7 @@ export function ContextProvider({
   }, [cart])
 
   return (
-    <Context.Provider
+    <ShopifyContext.Provider
       value={{
         client,
         cart,
@@ -126,6 +126,6 @@ export function ContextProvider({
       }}
     >
       {children}
-    </Context.Provider>
+    </ShopifyContext.Provider>
   )
 }

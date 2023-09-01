@@ -7,7 +7,7 @@ interface ContextShape {
   setCart: React.Dispatch<React.SetStateAction<ShopifyBuy.Cart | null>>
 }
 
-export const Context = React.createContext<ContextShape>({
+export const ShopifyContext = React.createContext<ContextShape>({
   client: null,
   cart: null,
   setCart: () => {

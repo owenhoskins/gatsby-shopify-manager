@@ -1,4 +1,4 @@
 // Modified exports
-export { Context } from "./src/Context"
-export { ContextProvider } from "./src/ContextProvider"
+export { ShopifyContext } from "./src/Context"
+export { ManagerContextProvider } from "./src/ContextProvider"
 export * from "./src/hooks"

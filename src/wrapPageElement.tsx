@@ -1,6 +1,6 @@
 import React from "react"
 import withDefaults from "../defaults"
-import { ContextProvider } from "./ContextProvider"
+import { ManagerContextProvider } from "./ContextProvider"
 
 export const wrapPageElement = ({ element, props }, themeOptions) => {
   if (!props) return
@@ -9,7 +9,7 @@ export const wrapPageElement = ({ element, props }, themeOptions) => {
     pageContext
 
   console.log(
-    "gatsby-shopify-manager wrapPageElement 30/05/23: ",
+    "gatsby-shopify-manager wrapPageElement 1/09/23: ",
     pageContext,
     path
   )
@@ -29,12 +29,12 @@ export const wrapPageElement = ({ element, props }, themeOptions) => {
   }
 
   return (
-    <ContextProvider
+    <ManagerContextProvider
       shopName={shopName}
       accessToken={accessToken}
       language={language === "en" ? "en-GB" : "de-de"}
     >
       {element}
-    </ContextProvider>
+    </ManagerContextProvider>
   )
 }
