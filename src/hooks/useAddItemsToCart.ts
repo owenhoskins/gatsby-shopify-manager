@@ -1,11 +1,9 @@
 import { useContext } from "react"
 import ShopifyBuy from "shopify-buy"
-import { Context } from "../Context"
+import { ShopifyContext } from "../Context"
 
 export function useAddItemsToCart() {
-  const { client, cart, setCart } = useContext(Context)
-
-  console.log("useAddItemsToCart: ", client, cart, Context)
+  const { client, cart, setCart } = useContext(ShopifyContext)
 
   async function addItemsToCart(items: ShopifyBuy.CheckoutLineItemInput[]) {
     if (cart == null || client == null) {
