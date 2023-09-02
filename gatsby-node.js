@@ -1,3 +1,7 @@
+exports.onPreInit = () => {
+  console.log("plugin gatsby-shopify-manager | 2/9/23 | API Version: 2022-10")
+}
+
 /*
   In order to access user options throughout the app, we have to
   add them as a node within the Graphql.

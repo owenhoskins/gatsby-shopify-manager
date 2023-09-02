@@ -41,7 +41,7 @@ export function ManagerContextProvider({
         ShopifyBuy.buildClient({
           storefrontAccessToken: accessToken,
           domain: isCustomDomain ? shopName : `${shopName}.myshopify.com`,
-          apiVersion: `2022-07`,
+          apiVersion: `2022-10`,
           language, // "en-GB"
         }),
       [language]
