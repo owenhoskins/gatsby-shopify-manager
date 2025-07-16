@@ -2172,10 +2172,10 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.0.tgz#591c1ce3a702c45ee15f47a42ade72c2fd78978a"
   integrity sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==
 
-"@types/shopify-buy@^2.17.0":
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/@types/shopify-buy/-/shopify-buy-2.17.0.tgz#2cfd9592254dcb3c09c3d9b8b5046b064e28cddd"
-  integrity sha512-70j7qEdxSxCzYaIQ7gum3yKU0cqsHChPQvOTuGaaL9YndFqn2W6zW+x+V3LoRdzrb6V+FaLXAc+3r4Yb+dQXOA==
+"@types/shopify-buy@3":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/shopify-buy/-/shopify-buy-3.0.0.tgz#6af05e9dfc8e1277e8243198480335564f138849"
+  integrity sha512-AoTGG9/cqNpnnXYsYK1Sb8iAmQ9DqJ4gqLGXnx8PdiuOdCuKSNY8lqk8j+qe73jMsvdLhgRYRJP/OxR4+6Or6A==
 
 "@types/tmp@^0.0.33":
   version "0.0.33"
@@ -8306,10 +8306,10 @@ shell-quote@^1.7.3:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.1.tgz#6dbf4db75515ad5bac63b4f1894c3a154c766680"
   integrity sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==
 
-shopify-buy@2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-2.17.0.tgz#9ef8287fa285d6f5b59d44d985926f8f23da97c8"
-  integrity sha512-Wp3w7dRxvk5vt6BojUfMpcOmSrbKUqEXpinwW/Q7Eqn2kHw6H4yIK7D9aU+nkeE2W2mTuUYfrKdK/rdDcAa+fQ==
+shopify-buy@3:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-3.0.7.tgz#a0ec8b7818fc8f508ac2988704f011434ca86f4e"
+  integrity sha512-HTuC8SSaVSFJRToXbrn54TSjxNt5d4GN//xfHXfHBJYSuHzGouF97CFapjdM+Pz5HjcGST6ife4B64GNo7taYw==
 
 side-channel@^1.0.4:
   version "1.0.4"
